@@ -3,22 +3,11 @@
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+# run cd blake_test
+# open database.yml and update username, password for development and test databases
+# run rspec to run all test
+# run rake db:migrate
+# run rails generate_lessons (Rails 5 command) to create 100 lessons 50 students and 3 lessons
+# run rails add_more_lesson_parts (Rails 5 command) to create 5 parts for the first 50 lessons
+# run rails s
+# go to http://localhost:3000/student_progress/index

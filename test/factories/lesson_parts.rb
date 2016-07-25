@@ -1,9 +1,8 @@
 FactoryGirl.define do
-  factory :lesson do
+  factory :lesson_part do
     sequence :name do |n|
-      "Lesson 1#{n}"
+      "Lesson part #{n}"
     end
-    school
+    lesson
   end
-
 end

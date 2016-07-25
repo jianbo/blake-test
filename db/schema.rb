@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160722045231) do
+ActiveRecord::Schema.define(version: 20160725082344) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,8 @@ ActiveRecord::Schema.define(version: 20160722045231) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "school_id"
+    t.index ["school_id"], name: "index_lessons_on_school_id", using: :btree
   end
 
   create_table "school_class_students", force: :cascade do |t|
@@ -51,6 +53,28 @@ ActiveRecord::Schema.define(version: 20160722045231) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "school_id"
+    t.index ["school_id"], name: "index_school_classes_on_school_id", using: :btree
+  end
+
+  create_table "schools", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "sequences", force: :cascade do |t|
+    t.string   "sequenceable_type"
+    t.integer  "sequenceable_id"
+    t.integer  "sequence_ids",                   array: true
+    t.string   "sequence_type"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.string   "identifier"
+    t.index ["identifier"], name: "index_sequences_on_identifier", using: :btree
+    t.index ["sequence_ids"], name: "index_sequences_on_sequence_ids", using: :gin
+    t.index ["sequenceable_id"], name: "index_sequences_on_sequenceable_id", using: :btree
+    t.index ["sequenceable_type"], name: "index_sequences_on_sequenceable_type", using: :btree
   end
 
   create_table "student_progresses", force: :cascade do |t|
@@ -66,8 +90,11 @@ ActiveRecord::Schema.define(version: 20160722045231) do
 
   create_table "students", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.integer  "school_id"
+    t.integer  "lesson_part_id"
+    t.index ["lesson_part_id"], name: "index_students_on_lesson_part_id", using: :btree
   end
 
   create_table "teachers", force: :cascade do |t|

@@ -1,0 +1,17 @@
+<h1>Student Progress</h1>
+
+<ul>
+  <% @teacher.all_students.order('created_at asc').each do |student| %>
+      <li>
+        <%= student.name %>
+        <h4>Completed lessons</h4>
+        <ul>
+          <% student.student_progresses.each do |progress| %>
+            <li>
+              Lesson "<%=  progress.lesson.name %>" and part "<%=  progress.lesson_part.name %>" at <%=  progress.created_at.strftime('%d %b, %y @ %H:%M') %>
+            </li>
+          <% end %>
+        </ul>
+      </li>
+  <% end %>
+</ul>
